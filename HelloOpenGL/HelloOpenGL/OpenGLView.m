@@ -9,6 +9,10 @@
 #import "OpenGLView.h"
 #import "CC3GLMatrix.h"
 
+#import <CoreVideo/CVOpenGLESTextureCache.h>
+
+#import "AssetsLibrary/AssetsLibrary.h"
+
 @implementation OpenGLView
 
 typedef struct {
@@ -29,14 +33,15 @@ const GLubyte Indices[] = {
      2, 3, 0
 };*/
 
-#define TEX_COORD_MAX   4
+#define TEX_COORD_MAX   1
 
 const Vertex Vertices[] = {
     // Front
-    {{1, -1, 0}, {1, 0, 0, 1}, {TEX_COORD_MAX, 0}},
-    {{1, 1, 0}, {0, 1, 0, 1}, {TEX_COORD_MAX, TEX_COORD_MAX}},
-    {{-1, 1, 0}, {0, 0, 1, 1}, {0, TEX_COORD_MAX}},
-    {{-1, -1, 0}, {0, 0, 0, 1}, {0, 0}},
+    
+    {{2, -2, 0}, {1, 0, 0, 1}, {TEX_COORD_MAX, TEX_COORD_MAX}},
+    {{2, 2, 0}, {0, 1, 0, 1}, {TEX_COORD_MAX, 0}},
+    {{-2, 2, 0}, {0, 0, 1, 1}, {0, 0}},
+    {{-2, -2, 0}, {0, 0, 0, 1}, {0, TEX_COORD_MAX}},
     /*
     // Back
     {{1, 1, -2}, {1, 0, 0, 1}, {TEX_COORD_MAX, 0}},
@@ -248,7 +253,7 @@ const GLubyte Indices[] = {
     glClear(GL_COLOR_BUFFER_BIT );
     //glEnable(GL_DEPTH_TEST);        
     
-    /*
+    
     CC3GLMatrix *projection = [CC3GLMatrix matrix];
     float h = 4.0f * self.frame.size.height / self.frame.size.width;
     [projection populateFromFrustumLeft:-2 andRight:2 andBottom:-h/2 andTop:h/2 andNear:6 andFar:10];
@@ -258,11 +263,11 @@ const GLubyte Indices[] = {
     CC3GLMatrix *modelView = [CC3GLMatrix matrix];
     [modelView populateFromTranslation:CC3VectorMake(sin(CACurrentMediaTime()), 0, -7)];
     _currentRotation += displayLink.duration * 90;
+    //[modelView scaleBy:CC3VectorMake(1.5, 1.5, 1.5)];
     //[modelView rotateBy:CC3VectorMake(_currentRotation, _currentRotation, 0)];
-    glUniformMatrix4fv(_modelViewUniform, 1, 0, modelView.glMatrix);*/
+    glUniformMatrix4fv(_modelViewUniform, 1, 0, modelView.glMatrix);
     
-    // 1
-    glViewport(0, 0, self.frame.size.width, self.frame.size.width);
+    glViewport(160, 0, self.frame.size.width, self.frame.size.height);
         
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
@@ -273,28 +278,13 @@ const GLubyte Indices[] = {
     
     glVertexAttribPointer(_texCoordSlot, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 7));    
     
-    glActiveTexture(GL_TEXTURE0); 
-    glBindTexture(GL_TEXTURE_2D, _floorTexture);
-    glUniform1i(_textureUniform, 0); 
+    
+//    glActiveTexture(GL_TEXTURE0); 
+//    glBindTexture(GL_TEXTURE_2D, _floorTexture);
+//    glUniform1i(_textureUniform, 0); 
     
     // 3
     glDrawElements(GL_TRIANGLES, sizeof(Indices)/sizeof(Indices[0]), GL_UNSIGNED_BYTE, 0);
-    
-    //glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer2);
-    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer2);
-
-    glActiveTexture(GL_TEXTURE0); // unneccc in practice
-    glBindTexture(GL_TEXTURE_2D, _fishTexture);
-    glUniform1i(_textureUniform, 0); // unnecc in practice
-
-    //glUniformMatrix4fv(_modelViewUniform, 1, 0, modelView.glMatrix);
-    
-    /*
-    glVertexAttribPointer(_positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-    glVertexAttribPointer(_colorSlot, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 3));
-    glVertexAttribPointer(_texCoordSlot, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 7));*/
-
-    //glDrawElements(GL_TRIANGLE_STRIP, sizeof(Indices2)/sizeof(Indices2[0]), GL_UNSIGNED_BYTE, 0);
     
     [_context presentRenderbuffer:GL_RENDERBUFFER];
 }
@@ -345,16 +335,42 @@ const GLubyte Indices[] = {
     self = [super initWithFrame:frame];
     if (self) {        
         [self setupLayer];        
-        [self setupContext];    
+        [self setupContext];
+        
+        _screenWidth = [UIScreen mainScreen].bounds.size.width;
+        _screenHeight = [UIScreen mainScreen].bounds.size.height;
+        self.contentScaleFactor = [UIScreen mainScreen].scale;
+        
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        {
+            // meshFactor controls the ending ripple mesh size.
+            // For example mesh width = screenWidth / meshFactor.
+            // It's chosen based on both screen resolution and device size.
+            _meshFactor = 8;
+            
+            // Choosing bigger preset for bigger screen.
+            _sessionPreset = AVCaptureSessionPreset1280x720;
+        }
+        else
+        {
+            _meshFactor = 4;
+            _sessionPreset = AVCaptureSessionPreset640x480;        
+        }
+        
         //[self setupDepthBuffer];
         [self setupRenderBuffer];        
-        [self setupFrameBuffer];     
-        [self compileShaders];
+        [self setupFrameBuffer];
         [self setupVBOs];
+        [self compileShaders];
+        
         [self setupDisplayLink];
+        
+        [self setupAVCapture];
         //_floorTexture = [self setupTexture:@"tile_floor.png"];
         _floorTexture = [self setupTexture:@"test.png"];
         //_fishTexture = [self setupTexture:@"item_powerup_fish.png"];
+        
+        
     }
     return self;
 }
@@ -365,5 +381,219 @@ const GLubyte Indices[] = {
     _context = nil;
     [super dealloc];
 }
+
+#pragma mark --
+#pragma mark AVFoundation
+
+- (void)cleanUpTextures
+{    
+    if (_lumaTexture)
+    {
+        CFRelease(_lumaTexture);
+        _lumaTexture = NULL;        
+    }
+    
+    if (_chromaTexture)
+    {
+        CFRelease(_chromaTexture);
+        _chromaTexture = NULL;
+    }
+    
+    // Periodic texture cache flush every frame
+    CVOpenGLESTextureCacheFlush(_videoTextureCache, 0);
+}
+
+- (void)captureOutput:(AVCaptureOutput *)captureOutput 
+didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer 
+       fromConnection:(AVCaptureConnection *)connection
+{
+    CVReturn err;
+	CVImageBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+    size_t width = CVPixelBufferGetWidth(pixelBuffer);
+    size_t height = CVPixelBufferGetHeight(pixelBuffer);
+    
+    _textureWidth = width;
+    _textureHeight = height;
+    
+    if (!_videoTextureCache)
+    {
+        NSLog(@"No video texture cache");
+        return;
+    }
+    
+    [self cleanUpTextures];
+    
+    // CVOpenGLESTextureCacheCreateTextureFromImage will create GLES texture
+    // optimally from CVImageBufferRef.
+    
+    // Y-plane
+    glActiveTexture(GL_TEXTURE0);
+    err = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault, 
+                                                       _videoTextureCache,
+                                                       pixelBuffer,
+                                                       NULL,
+                                                       GL_TEXTURE_2D,
+                                                       GL_RED_EXT,
+                                                       _textureWidth,
+                                                       _textureHeight,
+                                                       GL_RED_EXT,
+                                                       GL_UNSIGNED_BYTE,
+                                                       0,
+                                                       &_lumaTexture);
+    if (err) 
+    {
+        NSLog(@"Error at CVOpenGLESTextureCacheCreateTextureFromImage %d", err);
+    }   
+    
+    glBindTexture(CVOpenGLESTextureGetTarget(_lumaTexture), CVOpenGLESTextureGetName(_lumaTexture));
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE); 
+    
+    
+    
+    // UV-plane
+    glActiveTexture(GL_TEXTURE1);
+    err = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault, 
+                                                       _videoTextureCache,
+                                                       pixelBuffer,
+                                                       NULL,
+                                                       GL_TEXTURE_2D,
+                                                       GL_RG_EXT,
+                                                       _textureWidth/2,
+                                                       _textureHeight/2,
+                                                       GL_RG_EXT,
+                                                       GL_UNSIGNED_BYTE,
+                                                       1,
+                                                       &_chromaTexture);
+    if (err) 
+    {
+        NSLog(@"Error at CVOpenGLESTextureCacheCreateTextureFromImage %d", err);
+    }
+    
+    glBindTexture(CVOpenGLESTextureGetTarget(_chromaTexture), CVOpenGLESTextureGetName(_chromaTexture));
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE); 
+    
+}
+
+
+- (void)setupAVCapture
+{
+    //-- Create CVOpenGLESTextureCacheRef for optimal CVImageBufferRef to GLES texture conversion.
+    CVReturn err = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault, NULL, _context, NULL, &_videoTextureCache);
+    if (err) 
+    {
+        NSLog(@"Error at CVOpenGLESTextureCacheCreate %d", err);
+        return;
+    }
+    
+    //-- Setup Capture Session.
+    _session = [[AVCaptureSession alloc] init];
+    [_session beginConfiguration];
+    
+    //-- Set preset session size.
+    [_session setSessionPreset:_sessionPreset];
+    
+    //-- Creata a video device and input from that Device.  Add the input to the capture session.
+    AVCaptureDevice * videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    if(videoDevice == nil)
+        assert(0);
+    
+    //-- Add the device to the session.
+    NSError *error;        
+    AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:&error];
+    if(error)
+        assert(0);
+    
+    [_session addInput:input];
+    
+    //-- Create the output for the capture session.
+    AVCaptureVideoDataOutput *dataOutput = [[AVCaptureVideoDataOutput alloc] init];
+    [dataOutput setAlwaysDiscardsLateVideoFrames:YES]; // Probably want to set this to NO when recording
+    
+    //-- Set to YUV420.
+    [dataOutput setVideoSettings:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:kCVPixelFormatType_420YpCbCr8BiPlanarFullRange] forKey:(id)kCVPixelBufferPixelFormatTypeKey]]; // Necessary for manual preview
+    
+    // Set dispatch to be on the main thread so OpenGL can do things with the data
+    [dataOutput setSampleBufferDelegate:self queue:dispatch_get_main_queue()];
+    
+    stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
+    [stillImageOutput setOutputSettings:[NSDictionary dictionaryWithObjectsAndKeys:AVVideoCodecJPEG,AVVideoCodecKey, nil]];
+    
+    [_session addOutput:dataOutput];
+    [_session addOutput:stillImageOutput];
+    [_session commitConfiguration];
+    
+    /*
+     AVCaptureVideoPreviewLayer *captureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_session];
+     
+     UIView *view = self.view;
+     CALayer *layer = view.layer;
+     [layer setMasksToBounds:YES];
+     
+     CGRect bounds = [view bounds];
+     [captureVideoPreviewLayer setFrame:bounds];
+     
+     if ([captureVideoPreviewLayer isOrientationSupported]) {
+     [captureVideoPreviewLayer setOrientation:AVCaptureVideoOrientationPortrait];
+     }
+     [captureVideoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];*/
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{[_session startRunning];});
+    //[_session startRunning];
+}
+
+- (void)tearDownAVCapture
+{
+    [self cleanUpTextures];
+    
+    CFRelease(_videoTextureCache);
+}
+
+/*
+-(void)captureStillImage
+{
+    AVCaptureConnection *stillImageConnection;
+    for (AVCaptureConnection *connection in [stillImageOutput connections]) {
+        for (AVCaptureInputPort *port in [connection inputPorts]) {
+            if ([[port mediaType] isEqual:AVMediaTypeVideo]) {
+                stillImageConnection = connection;
+            }
+        }
+    }
+    [stillImageOutput captureStillImageAsynchronouslyFromConnection:stillImageConnection completionHandler:^(CMSampleBufferRef imageDataSampleBuffer,NSError *error){
+        ALAssetsLibraryWriteImageCompletionBlock completeBlock = ^(NSURL *assetURL,NSError *error){
+            if (error) {
+                NSLog(@"assetslibrary write image error :%@",[error description]);
+            }
+        };
+        if (imageDataSampleBuffer != NULL) {
+            //NSData *data = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+            ALAssetsLibrary *assetslibrary = [[ALAssetsLibrary alloc] init];
+            UIImage *image = ((GLKView*)self.view).snapshot;  //[UIImage imageWithData:data];
+            [assetslibrary writeImageToSavedPhotosAlbum:image.CGImage orientation:(ALAssetOrientation)image.imageOrientation completionBlock:completeBlock];
+        }else {
+            completeBlock(nil,error);
+        }
+    }];
+}
+
+-(void)snap:(id)sender{
+    
+    [self captureStillImage];
+    
+    UIView *flashView = [[UIView alloc] initWithFrame:[self.view frame]];
+    [flashView setBackgroundColor:[UIColor whiteColor]];
+    [[[self view] window] addSubview:flashView];
+    
+    [UIView animateWithDuration:.4f
+                     animations:^{
+                         [flashView setAlpha:0.f];
+                     }
+                     completion:^(BOOL finished){
+                         [flashView removeFromSuperview];
+                     }
+     ];
+}*/
 
 @end
