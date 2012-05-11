@@ -70,6 +70,7 @@ enum
 
 //-----------------------------------------
 
+/*
 typedef struct {
     float Position[3];
     float Color[4];
@@ -90,7 +91,7 @@ const GLubyte Indices[] = {
     // Front
     0, 1, 2,
     2, 3, 0,
-};
+};*/
 
 //-----------------------------------------
 
@@ -140,8 +141,6 @@ const GLubyte Indices[] = {
 - (void)setupGL;
 - (void)tearDownGL;
 
-- (void)setupVBOs;
-
 - (BOOL)loadShaders;
 - (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file;
 - (BOOL)linkProgram:(GLuint)prog;
@@ -187,12 +186,12 @@ const GLubyte Indices[] = {
     
     [self setupGL];
     
-    [self setupRenderBuffer];        
-    [self setupFrameBuffer];  
+    //[self setupRenderBuffer];        
+    //[self setupFrameBuffer];  
     
-    //[self setupAVCapture];
+    [self setupAVCapture];
     
-    [self setupVBOs];
+    //[self setupVBOs];
     
     _floorTexture = [self setupTexture:@"test.png"];
     
@@ -401,7 +400,10 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE); 
     
     //--------------------------------------------------------
-    
+    glActiveTexture(GL_TEXTURE1); 
+    glBindTexture(GL_TEXTURE_2D, _floorTexture);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     
 }
 
@@ -501,31 +503,6 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     
 }
 
-- (void)setupFrameBuffer {    
-    GLuint framebuffer;
-    glGenFramebuffers(1, &framebuffer);
-    glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);   
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _colorRenderBuffer);
-}
-
-- (void)setupRenderBuffer {
-    glGenRenderbuffers(1, &_colorRenderBuffer);
-    glBindRenderbuffer(GL_RENDERBUFFER, _colorRenderBuffer);        
-    //[_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:_eaglLayer];    
-}
-
-- (void)setupVBOs {
-    
-    glGenBuffers(1, &_vertexBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
-    
-    glGenBuffers(1, &_indexBuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);
-    
-}
-
 - (void)setupGL
 {
     [EAGLContext setCurrentContext:_context];
@@ -534,18 +511,8 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     
     glUseProgram(_program);
         
-    //glUniform1i(uniforms[UNIFORM_Y], 0);
-    //glUniform1i(uniforms[UNIFORM_UV], 1);
-    
-    
-    _positionSlot = glGetAttribLocation(_program, "Position");
-    _colorSlot = glGetAttribLocation(_program, "SourceColor");
-    glEnableVertexAttribArray(_positionSlot);
-    glEnableVertexAttribArray(_colorSlot);
-    
-    _texCoordSlot = glGetAttribLocation(_program, "TexCoordIn");
-    glEnableVertexAttribArray(_texCoordSlot);
-    _textureUniform = glGetUniformLocation(_program, "Texture");
+    glUniform1i(uniforms[UNIFORM_Y], 0);
+    glUniform1i(uniforms[UNIFORM_UV], 1);
 }
 
 - (GLuint)setupTexture:(NSString *)fileName {
@@ -614,12 +581,19 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
     
-    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_BLEND);
-    
-    glClearColor(0, 104.0/255.0, 55.0/255.0, 1.0);
     
     glClear(GL_COLOR_BUFFER_BIT);
+    
+    
+
+    /*
+     
+     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+     glEnable(GL_BLEND);
+     
+     //glClearColor(0, 104.0/255.0, 55.0/255.0, 1.0);
+    glClear(GL_COLOR_BUFFER_BIT);
+     
     glViewport(0, 100, _screenWidth, _screenWidth);
     
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
@@ -631,6 +605,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     
     glVertexAttribPointer(_texCoordSlot, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 7));    
     
+    
     glActiveTexture(GL_TEXTURE0); 
     glBindTexture(GL_TEXTURE_2D, _floorTexture);
     glUniform1i(_textureUniform, 0); 
@@ -638,11 +613,11 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     // 3
     glDrawElements(GL_TRIANGLES, sizeof(Indices)/sizeof(Indices[0]), GL_UNSIGNED_BYTE, 0);
     
-    [_context presentRenderbuffer:GL_RENDERBUFFER];
+    [_context presentRenderbuffer:GL_RENDERBUFFER];*/
     
     if (_ripple) 
     {
-        //glDrawElements(GL_TRIANGLE_STRIP, [_ripple getIndexCount], GL_UNSIGNED_SHORT, 0);
+        glDrawElements(GL_TRIANGLE_STRIP, [_ripple getIndexCount], GL_UNSIGNED_SHORT, 0);
     }
 }
 
@@ -697,8 +672,8 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     
     // Bind attribute locations.
     // This needs to be done prior to linking.
-   // glBindAttribLocation(_program, ATTRIB_VERTEX, "position");
-   // glBindAttribLocation(_program, ATTRIB_TEXCOORD, "texCoord");
+    glBindAttribLocation(_program, ATTRIB_VERTEX, "position");
+    glBindAttribLocation(_program, ATTRIB_TEXCOORD, "texCoord");
     
     // Link program.
     if (![self linkProgram:_program]) {
@@ -721,8 +696,8 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     }
     
     // Get uniform locations.
-   // uniforms[UNIFORM_Y] = glGetUniformLocation(_program, "SamplerY");
-   // uniforms[UNIFORM_UV] = glGetUniformLocation(_program, "SamplerUV");
+    uniforms[UNIFORM_Y] = glGetUniformLocation(_program, "SamplerY");
+    uniforms[UNIFORM_UV] = glGetUniformLocation(_program, "SamplerUV");
     
     // Release vertex and fragment shaders.
     if (vertShader) {

@@ -44,23 +44,7 @@
  Copyright (C) 2012 Apple Inc. All Rights Reserved.
  */
  
-attribute vec4 Position; 
-attribute vec4 SourceColor; 
 
-varying vec4 DestinationColor; 
-
-
-attribute vec2 TexCoordIn; // New
-varying vec2 TexCoordOut; // New
-
-void main(void) { 
-    DestinationColor = SourceColor; 
-    gl_Position =  Position;
-    
-    TexCoordOut = TexCoordIn; // New
-}
-
-/*
 attribute vec4 position;
 attribute vec2 texCoord;
 
@@ -70,6 +54,6 @@ void main()
 {
     gl_Position = position;
     texCoordVarying = texCoord;
-}*/
+}
 
 
