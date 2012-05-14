@@ -248,10 +248,10 @@ const GLubyte Indices[] = {
     glClear(GL_COLOR_BUFFER_BIT );
     //glEnable(GL_DEPTH_TEST);        
     
-    /*
+    
     CC3GLMatrix *projection = [CC3GLMatrix matrix];
     float h = 4.0f * self.frame.size.height / self.frame.size.width;
-    [projection populateFromFrustumLeft:-2 andRight:2 andBottom:-h/2 andTop:h/2 andNear:6 andFar:10];
+    [projection populateFromFrustumLeft:-2 andRight:2 andBottom:-h/2 andTop:h/2 andNear:4 andFar:10];
     glUniformMatrix4fv(_projectionUniform, 1, 0, projection.glMatrix);
     
     
@@ -259,7 +259,7 @@ const GLubyte Indices[] = {
     [modelView populateFromTranslation:CC3VectorMake(sin(CACurrentMediaTime()), 0, -7)];
     _currentRotation += displayLink.duration * 90;
     //[modelView rotateBy:CC3VectorMake(_currentRotation, _currentRotation, 0)];
-    glUniformMatrix4fv(_modelViewUniform, 1, 0, modelView.glMatrix);*/
+    glUniformMatrix4fv(_modelViewUniform, 1, 0, modelView.glMatrix);
     
     // 1
     glViewport(0, 0, self.frame.size.width, self.frame.size.width);
@@ -282,10 +282,6 @@ const GLubyte Indices[] = {
     
     //glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer2);
     //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer2);
-
-    glActiveTexture(GL_TEXTURE0); // unneccc in practice
-    glBindTexture(GL_TEXTURE_2D, _fishTexture);
-    glUniform1i(_textureUniform, 0); // unnecc in practice
 
     //glUniformMatrix4fv(_modelViewUniform, 1, 0, modelView.glMatrix);
     
