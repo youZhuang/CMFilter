@@ -11,6 +11,11 @@
 
 @interface JPFilteredView : UIView
 
+@property (nonatomic,assign) GLKMatrix4 contentTransform;
+@property (nonatomic,assign) GLKMatrix2 texcoordTransform;
+
 -(void)render;
+
+-(BOOL)setFilterFragmentShaderFromFile:(NSString*)path error:(NSError *__autoreleasing *)error;
 
 @end

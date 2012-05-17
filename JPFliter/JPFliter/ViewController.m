@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "JPFilteredView.h"
 
 @interface ViewController ()
 
@@ -18,6 +19,15 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    CGRect rect = [[UIScreen mainScreen] bounds];
+    JPFilteredView *view = [[JPFilteredView alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
+    [self.view addSubview:view];
+    [view release];
+}
+
+-(void)dealloc
+{
+    [super dealloc];
 }
 
 - (void)viewDidUnload

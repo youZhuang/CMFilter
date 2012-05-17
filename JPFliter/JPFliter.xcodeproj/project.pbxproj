@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A50D09341560F98200D7886E /* DefaultFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A50D09321560F98200D7886E /* DefaultFragmentShader.glsl */; };
+		A50D09351560F98200D7886E /* DefaultVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A50D09331560F98200D7886E /* DefaultVertexShader.glsl */; };
+		A524E9001564B8F50082E8F5 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = A524E8FF1564B8F40082E8F5 /* test.png */; };
 		A5F9F2941560D13A00208A65 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F9F2931560D13A00208A65 /* UIKit.framework */; };
 		A5F9F2961560D13A00208A65 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F9F2951560D13A00208A65 /* Foundation.framework */; };
 		A5F9F2981560D13A00208A65 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F9F2971560D13A00208A65 /* CoreGraphics.framework */; };
@@ -22,9 +25,17 @@
 		A5F9F2BB1560D1EA00208A65 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F9F2BA1560D1EA00208A65 /* CoreVideo.framework */; };
 		A5F9F2BD1560D1F000208A65 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F9F2BC1560D1F000208A65 /* AVFoundation.framework */; };
 		A5F9F2BF1560D1FA00208A65 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F9F2BE1560D1FA00208A65 /* QuartzCore.framework */; };
+		A5F9F2D31560E5DB00208A65 /* GLKAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F9F2CC1560E5DB00208A65 /* GLKAttribute.m */; };
+		A5F9F2D41560E5DB00208A65 /* GLKProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F9F2CE1560E5DB00208A65 /* GLKProgram.m */; };
+		A5F9F2D51560E5DB00208A65 /* GLKShaderVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F9F2D01560E5DB00208A65 /* GLKShaderVariable.m */; };
+		A5F9F2D61560E5DB00208A65 /* GLKUniform.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F9F2D21560E5DB00208A65 /* GLKUniform.m */; };
+		A5F9F2DC1560F14400208A65 /* tile_floor.png in Resources */ = {isa = PBXBuildFile; fileRef = A5F9F2DB1560F14400208A65 /* tile_floor.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A50D09321560F98200D7886E /* DefaultFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = DefaultFragmentShader.glsl; path = JPFliter/resource/DefaultFragmentShader.glsl; sourceTree = "<group>"; };
+		A50D09331560F98200D7886E /* DefaultVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = DefaultVertexShader.glsl; path = JPFliter/resource/DefaultVertexShader.glsl; sourceTree = "<group>"; };
+		A524E8FF1564B8F40082E8F5 /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = test.png; path = JPFliter/resource/test.png; sourceTree = "<group>"; };
 		A5F9F28F1560D13A00208A65 /* JPFliter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JPFliter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5F9F2931560D13A00208A65 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A5F9F2951560D13A00208A65 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -46,6 +57,15 @@
 		A5F9F2BA1560D1EA00208A65 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		A5F9F2BC1560D1F000208A65 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A5F9F2BE1560D1FA00208A65 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A5F9F2CB1560E5DB00208A65 /* GLKAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKAttribute.h; sourceTree = "<group>"; };
+		A5F9F2CC1560E5DB00208A65 /* GLKAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLKAttribute.m; sourceTree = "<group>"; };
+		A5F9F2CD1560E5DB00208A65 /* GLKProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKProgram.h; sourceTree = "<group>"; };
+		A5F9F2CE1560E5DB00208A65 /* GLKProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLKProgram.m; sourceTree = "<group>"; };
+		A5F9F2CF1560E5DB00208A65 /* GLKShaderVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKShaderVariable.h; sourceTree = "<group>"; };
+		A5F9F2D01560E5DB00208A65 /* GLKShaderVariable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLKShaderVariable.m; sourceTree = "<group>"; };
+		A5F9F2D11560E5DB00208A65 /* GLKUniform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKUniform.h; sourceTree = "<group>"; };
+		A5F9F2D21560E5DB00208A65 /* GLKUniform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLKUniform.m; sourceTree = "<group>"; };
+		A5F9F2DB1560F14400208A65 /* tile_floor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tile_floor.png; path = JPFliter/resource/tile_floor.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +98,7 @@
 				A5F9F2B41560D1D900208A65 /* GLKit.framework */,
 				A5F9F2B51560D1D900208A65 /* OpenGLES.framework */,
 				A5F9F2991560D13A00208A65 /* JPFliter */,
+				A5F9F2C01560E34E00208A65 /* Resource */,
 				A5F9F2921560D13A00208A65 /* Frameworks */,
 				A5F9F2901560D13A00208A65 /* Products */,
 			);
@@ -104,6 +125,7 @@
 		A5F9F2991560D13A00208A65 /* JPFliter */ = {
 			isa = PBXGroup;
 			children = (
+				A5F9F2CA1560E5DB00208A65 /* GLKitAdditions */,
 				A5F9F2B01560D16700208A65 /* GLFilters */,
 				A5F9F2A21560D13A00208A65 /* AppDelegate.h */,
 				A5F9F2A31560D13A00208A65 /* AppDelegate.m */,
@@ -133,6 +155,40 @@
 				A5F9F2B21560D19E00208A65 /* JPFilteredView.m */,
 			);
 			name = GLFilters;
+			sourceTree = "<group>";
+		};
+		A5F9F2C01560E34E00208A65 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				A524E8FF1564B8F40082E8F5 /* test.png */,
+				A50D09321560F98200D7886E /* DefaultFragmentShader.glsl */,
+				A50D09331560F98200D7886E /* DefaultVertexShader.glsl */,
+				A5F9F2DB1560F14400208A65 /* tile_floor.png */,
+				A5F9F2C11560E37000208A65 /* shaders */,
+			);
+			name = Resource;
+			sourceTree = "<group>";
+		};
+		A5F9F2C11560E37000208A65 /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = shaders;
+			sourceTree = "<group>";
+		};
+		A5F9F2CA1560E5DB00208A65 /* GLKitAdditions */ = {
+			isa = PBXGroup;
+			children = (
+				A5F9F2CB1560E5DB00208A65 /* GLKAttribute.h */,
+				A5F9F2CC1560E5DB00208A65 /* GLKAttribute.m */,
+				A5F9F2CD1560E5DB00208A65 /* GLKProgram.h */,
+				A5F9F2CE1560E5DB00208A65 /* GLKProgram.m */,
+				A5F9F2CF1560E5DB00208A65 /* GLKShaderVariable.h */,
+				A5F9F2D01560E5DB00208A65 /* GLKShaderVariable.m */,
+				A5F9F2D11560E5DB00208A65 /* GLKUniform.h */,
+				A5F9F2D21560E5DB00208A65 /* GLKUniform.m */,
+			);
+			path = GLKitAdditions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,6 +243,10 @@
 			files = (
 				A5F9F29E1560D13A00208A65 /* InfoPlist.strings in Resources */,
 				A5F9F2AA1560D13A00208A65 /* ViewController.xib in Resources */,
+				A5F9F2DC1560F14400208A65 /* tile_floor.png in Resources */,
+				A50D09341560F98200D7886E /* DefaultFragmentShader.glsl in Resources */,
+				A50D09351560F98200D7886E /* DefaultVertexShader.glsl in Resources */,
+				A524E9001564B8F50082E8F5 /* test.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +261,10 @@
 				A5F9F2A41560D13A00208A65 /* AppDelegate.m in Sources */,
 				A5F9F2A71560D13A00208A65 /* ViewController.m in Sources */,
 				A5F9F2B31560D19E00208A65 /* JPFilteredView.m in Sources */,
+				A5F9F2D31560E5DB00208A65 /* GLKAttribute.m in Sources */,
+				A5F9F2D41560E5DB00208A65 /* GLKProgram.m in Sources */,
+				A5F9F2D51560E5DB00208A65 /* GLKShaderVariable.m in Sources */,
+				A5F9F2D61560E5DB00208A65 /* GLKUniform.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,10 +336,13 @@
 		A5F9F2AE1560D13A00208A65 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zhuang you (84G5DN59YE)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JPFliter/JPFliter-Prefix.pch";
 				INFOPLIST_FILE = "JPFliter/JPFliter-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "968DF56D-6562-460F-AEBD-5D03424896B3";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -286,6 +353,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JPFliter/JPFliter-Prefix.pch";
 				INFOPLIST_FILE = "JPFliter/JPFliter-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -310,6 +378,7 @@
 				A5F9F2AF1560D13A00208A65 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
