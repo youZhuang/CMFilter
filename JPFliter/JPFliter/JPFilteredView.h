@@ -16,6 +16,10 @@
 
 -(void)render;
 
+- (void)_setTextureData:(GLvoid *)textureData width:(GLint)width height:(GLint)height;
+- (void)_updateTextureWithData:(GLvoid *)textureData;
+
 -(BOOL)setFilterFragmentShaderFromFile:(NSString*)path error:(NSError *__autoreleasing *)error;
+- (BOOL)setFilterFragmentShadersFromFiles:(NSArray *)paths error:(NSError *__autoreleasing *)error;
 
 @end

@@ -10,6 +10,7 @@
 		A50D09341560F98200D7886E /* DefaultFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A50D09321560F98200D7886E /* DefaultFragmentShader.glsl */; };
 		A50D09351560F98200D7886E /* DefaultVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A50D09331560F98200D7886E /* DefaultVertexShader.glsl */; };
 		A524E9001564B8F50082E8F5 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = A524E8FF1564B8F40082E8F5 /* test.png */; };
+		A5E20D58156627A200D03E63 /* JPFilteredCameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E20D57156627A200D03E63 /* JPFilteredCameraView.m */; };
 		A5F9F2941560D13A00208A65 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F9F2931560D13A00208A65 /* UIKit.framework */; };
 		A5F9F2961560D13A00208A65 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F9F2951560D13A00208A65 /* Foundation.framework */; };
 		A5F9F2981560D13A00208A65 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F9F2971560D13A00208A65 /* CoreGraphics.framework */; };
@@ -36,6 +37,8 @@
 		A50D09321560F98200D7886E /* DefaultFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = DefaultFragmentShader.glsl; path = JPFliter/resource/DefaultFragmentShader.glsl; sourceTree = "<group>"; };
 		A50D09331560F98200D7886E /* DefaultVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = DefaultVertexShader.glsl; path = JPFliter/resource/DefaultVertexShader.glsl; sourceTree = "<group>"; };
 		A524E8FF1564B8F40082E8F5 /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = test.png; path = JPFliter/resource/test.png; sourceTree = "<group>"; };
+		A5E20D56156627A200D03E63 /* JPFilteredCameraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPFilteredCameraView.h; sourceTree = "<group>"; };
+		A5E20D57156627A200D03E63 /* JPFilteredCameraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPFilteredCameraView.m; sourceTree = "<group>"; };
 		A5F9F28F1560D13A00208A65 /* JPFliter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JPFliter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5F9F2931560D13A00208A65 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A5F9F2951560D13A00208A65 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -153,6 +156,8 @@
 			children = (
 				A5F9F2B11560D19E00208A65 /* JPFilteredView.h */,
 				A5F9F2B21560D19E00208A65 /* JPFilteredView.m */,
+				A5E20D56156627A200D03E63 /* JPFilteredCameraView.h */,
+				A5E20D57156627A200D03E63 /* JPFilteredCameraView.m */,
 			);
 			name = GLFilters;
 			sourceTree = "<group>";
@@ -265,6 +270,7 @@
 				A5F9F2D41560E5DB00208A65 /* GLKProgram.m in Sources */,
 				A5F9F2D51560E5DB00208A65 /* GLKShaderVariable.m in Sources */,
 				A5F9F2D61560E5DB00208A65 /* GLKUniform.m in Sources */,
+				A5E20D58156627A200D03E63 /* JPFilteredCameraView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

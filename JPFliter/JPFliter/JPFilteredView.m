@@ -38,6 +38,7 @@ typedef struct{
 @property (nonatomic,assign) GLuint vertexBuffer;
 @property (nonatomic,assign) GLuint indexBuffer;
 @property (nonatomic,assign) GLuint texture;
+@property (nonatomic,assign) GLuint subTexture;
 
 @property (nonatomic,assign) GLint textureWidth;
 @property (nonatomic,assign) GLint textureHeight;
@@ -64,6 +65,7 @@ typedef struct{
 
 
 - (GLuint)setupTexture:(NSString *)fileName;
+- (GLuint)setupSubTexture:(NSString *)fileName;
 
 @end
 
@@ -80,6 +82,7 @@ typedef struct{
 @synthesize vertexBuffer = _vertexBuffer;
 @synthesize indexBuffer = _indexBuffer;
 @synthesize texture = _texture;
+@synthesize subTexture = _subTexture;
 @synthesize textureWidth = _textureWidth;
 @synthesize textureHeight = _textureHeight;
 @synthesize maxTextureSize = _maxTextureSize;
@@ -232,6 +235,8 @@ const GLubyte Indices[] = {
     NSLog(@"destroy openGL ES");
     [EAGLContext setCurrentContext:self.context];
     
+    glDeleteTextures(1, &_texture);
+    
     glDeleteBuffers(1, &_vertexBuffer);
     self.vertexBuffer = 0;
     
@@ -301,16 +306,18 @@ const GLubyte Indices[] = {
 }
 
 -(void)setDisplayLink{
-    CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(render)];
-    [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    //CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(render:)];
+    //[displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
 }
+
+//static NSInteger framecount = 0;
 
 -(void)render
 {
    // NSLog(@"render ...");
     [EAGLContext setCurrentContext:self.context];
     
-    glViewport(0, 0, self.textureWidth *4, self.textureHeight * 4);
+    glViewport(0, 0, self.textureWidth, self.textureHeight);
     glBindFramebuffer(GL_FRAMEBUFFER, self.frameBuffer);
     
     
@@ -358,9 +365,9 @@ const GLubyte Indices[] = {
     
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); 
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); 
     
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, spriteData);
     
@@ -368,6 +375,91 @@ const GLubyte Indices[] = {
 
     return texName;
     
+}
+- (GLuint)setupSubTexture:(NSString *)fileName {
+    
+    // 1
+    CGImageRef spriteImage = [UIImage imageNamed:fileName].CGImage;
+    if (!spriteImage) {
+        NSLog(@"Failed to load image %@", fileName);
+        exit(1);
+    }
+    
+    // 2
+    size_t width = CGImageGetWidth(spriteImage);
+    size_t height = CGImageGetHeight(spriteImage);
+    
+    //self.textureWidth = width;
+    //self.textureHeight = height;
+    
+    GLubyte * spriteData = (GLubyte *) calloc(width*height*4, sizeof(GLubyte));
+    
+    CGContextRef spriteContext = CGBitmapContextCreate(spriteData, width, height, 8, width*4, CGImageGetColorSpace(spriteImage), kCGImageAlphaPremultipliedLast);    
+    
+    // 3
+    CGContextDrawImage(spriteContext, CGRectMake(0, 0, width, height), spriteImage);
+    
+    CGContextRelease(spriteContext);
+    
+    // 4
+    glBindTexture(GL_TEXTURE_2D, _texture);
+    
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); 
+    
+    //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, spriteData);
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, spriteData);
+    
+    glBindTexture(GL_TEXTURE_2D, 0);
+    
+    free(spriteData); 
+    
+    return 0;
+    
+}
+
+- (GLuint)generateDefaultTextureWithWidth:(GLint)width height:(GLint)height data:(GLvoid *)data
+{
+    GLuint texture = 0;
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_BGRA, GL_UNSIGNED_BYTE, data);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    return texture;
+}
+
+- (void)_setTextureData:(GLvoid *)textureData width:(GLint)width height:(GLint)height
+{
+    [EAGLContext setCurrentContext:self.context];
+    
+    glDeleteTextures(1, &_texture);
+    
+    self.textureWidth = width;
+    self.textureHeight = height;
+    self.texture = [self generateDefaultTextureWithWidth:self.textureWidth height:self.textureHeight data:textureData];
+    
+    [_program bindSamplerNamed:@"texture" toTexture:self.texture unit:0];
+    
+    // Force an update on the contentTransform since it depends on the textureWidth and textureHeight
+    [self setNeedsLayout];
+}
+
+- (void)_updateTextureWithData:(GLvoid *)textureData
+{
+    [EAGLContext setCurrentContext:self.context];
+    
+    glBindTexture(GL_TEXTURE_2D, self.texture);
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, self.textureWidth, self.textureHeight, GL_BGRA, GL_UNSIGNED_BYTE, textureData);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    
+    [self render];
 }
 
 -(BOOL)setFilterFragmentShaderFromFile:(NSString *)path error:(NSError **)error
@@ -381,15 +473,12 @@ const GLubyte Indices[] = {
         return NO;
     }
     [_program setValue:&_contentTransform forUniformNamed:@"u_contentTransform"];
-    [_program setValue:&GLKMatrix2Identity forUniformNamed:@"u_texCoordTransform"];
+    [_program setValue:(void*)&GLKMatrix2Identity forUniformNamed:@"u_texCoordTransform"];
     
-    _texture = [self setupTexture:@"tile_floor.png"];
-    
-    GLuint _subTexture = [self setupTexture:@"test.png"];
+    //_texture = [self setupTexture:@"tile_floor.png"];
+    //_subTexture = [self setupTexture:@"test.png"];
     
     [_program bindSamplerNamed:@"texture" toTexture:_texture unit:0];
-    
-    [_program bindSamplerNamed:@"subtexture" toTexture:_subTexture unit:0];
     
     GLKAttribute *positionAttribute = [_program.attributes objectForKey:@"a_position"];
     //_positionSlot = glGetAttribLocation(_program.program, "a_position");
