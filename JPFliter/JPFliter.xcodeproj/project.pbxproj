@@ -7,10 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A50D09341560F98200D7886E /* DefaultFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A50D09321560F98200D7886E /* DefaultFragmentShader.glsl */; };
-		A50D09351560F98200D7886E /* DefaultVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A50D09331560F98200D7886E /* DefaultVertexShader.glsl */; };
+		A5012534156B3BF3003E0283 /* CameraTargetView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5012533156B3BF3003E0283 /* CameraTargetView.m */; };
 		A524E9001564B8F50082E8F5 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = A524E8FF1564B8F40082E8F5 /* test.png */; };
+		A56A6FF2156B77C7004688A8 /* test2.png in Resources */ = {isa = PBXBuildFile; fileRef = A56A6FF1156B77C7004688A8 /* test2.png */; };
+		A56A6FF4156B81E6004688A8 /* AlphaTestShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A56A6FF3156B81E6004688A8 /* AlphaTestShader.glsl */; };
 		A5E20D58156627A200D03E63 /* JPFilteredCameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E20D57156627A200D03E63 /* JPFilteredCameraView.m */; };
+		A5E7E83C156A17D900B17D3E /* DefaultFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A5E7E834156A17D900B17D3E /* DefaultFragmentShader.glsl */; };
+		A5E7E83D156A17D900B17D3E /* DefaultVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A5E7E835156A17D900B17D3E /* DefaultVertexShader.glsl */; };
+		A5E7E83E156A17D900B17D3E /* DiscretizeShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A5E7E836156A17D900B17D3E /* DiscretizeShader.glsl */; };
+		A5E7E83F156A17D900B17D3E /* HGaussianBlur.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A5E7E837156A17D900B17D3E /* HGaussianBlur.glsl */; };
+		A5E7E840156A17D900B17D3E /* LuminanceFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A5E7E838156A17D900B17D3E /* LuminanceFragmentShader.glsl */; };
+		A5E7E841156A17D900B17D3E /* PixelateShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A5E7E839156A17D900B17D3E /* PixelateShader.glsl */; };
+		A5E7E842156A17D900B17D3E /* SuckShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A5E7E83A156A17D900B17D3E /* SuckShader.glsl */; };
+		A5E7E843156A17D900B17D3E /* VGaussianBlur.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A5E7E83B156A17D900B17D3E /* VGaussianBlur.glsl */; };
+		A5E7E845156A474000B17D3E /* MosacShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A5E7E844156A474000B17D3E /* MosacShader.glsl */; };
+		A5E7E847156A4BDA00B17D3E /* CSEEmBossShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A5E7E846156A4BDA00B17D3E /* CSEEmBossShader.glsl */; };
+		A5E7E849156A547900B17D3E /* PancelShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A5E7E848156A547900B17D3E /* PancelShader.glsl */; };
+		A5F5D462156B67290097E650 /* MultiTextureShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A5F5D461156B67290097E650 /* MultiTextureShader.glsl */; };
 		A5F9F2941560D13A00208A65 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F9F2931560D13A00208A65 /* UIKit.framework */; };
 		A5F9F2961560D13A00208A65 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F9F2951560D13A00208A65 /* Foundation.framework */; };
 		A5F9F2981560D13A00208A65 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F9F2971560D13A00208A65 /* CoreGraphics.framework */; };
@@ -34,11 +47,25 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A50D09321560F98200D7886E /* DefaultFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = DefaultFragmentShader.glsl; path = JPFliter/resource/DefaultFragmentShader.glsl; sourceTree = "<group>"; };
-		A50D09331560F98200D7886E /* DefaultVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = DefaultVertexShader.glsl; path = JPFliter/resource/DefaultVertexShader.glsl; sourceTree = "<group>"; };
+		A5012532156B3BF3003E0283 /* CameraTargetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraTargetView.h; sourceTree = "<group>"; };
+		A5012533156B3BF3003E0283 /* CameraTargetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraTargetView.m; sourceTree = "<group>"; };
 		A524E8FF1564B8F40082E8F5 /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = test.png; path = JPFliter/resource/test.png; sourceTree = "<group>"; };
+		A56A6FF1156B77C7004688A8 /* test2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = test2.png; path = JPFliter/resource/test2.png; sourceTree = "<group>"; };
+		A56A6FF3156B81E6004688A8 /* AlphaTestShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AlphaTestShader.glsl; sourceTree = "<group>"; };
 		A5E20D56156627A200D03E63 /* JPFilteredCameraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPFilteredCameraView.h; sourceTree = "<group>"; };
 		A5E20D57156627A200D03E63 /* JPFilteredCameraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPFilteredCameraView.m; sourceTree = "<group>"; };
+		A5E7E834156A17D900B17D3E /* DefaultFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DefaultFragmentShader.glsl; sourceTree = "<group>"; };
+		A5E7E835156A17D900B17D3E /* DefaultVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DefaultVertexShader.glsl; sourceTree = "<group>"; };
+		A5E7E836156A17D900B17D3E /* DiscretizeShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DiscretizeShader.glsl; sourceTree = "<group>"; };
+		A5E7E837156A17D900B17D3E /* HGaussianBlur.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HGaussianBlur.glsl; sourceTree = "<group>"; };
+		A5E7E838156A17D900B17D3E /* LuminanceFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LuminanceFragmentShader.glsl; sourceTree = "<group>"; };
+		A5E7E839156A17D900B17D3E /* PixelateShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PixelateShader.glsl; sourceTree = "<group>"; };
+		A5E7E83A156A17D900B17D3E /* SuckShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SuckShader.glsl; sourceTree = "<group>"; };
+		A5E7E83B156A17D900B17D3E /* VGaussianBlur.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VGaussianBlur.glsl; sourceTree = "<group>"; };
+		A5E7E844156A474000B17D3E /* MosacShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MosacShader.glsl; sourceTree = "<group>"; };
+		A5E7E846156A4BDA00B17D3E /* CSEEmBossShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CSEEmBossShader.glsl; sourceTree = "<group>"; };
+		A5E7E848156A547900B17D3E /* PancelShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PancelShader.glsl; sourceTree = "<group>"; };
+		A5F5D461156B67290097E650 /* MultiTextureShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MultiTextureShader.glsl; sourceTree = "<group>"; };
 		A5F9F28F1560D13A00208A65 /* JPFliter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JPFliter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5F9F2931560D13A00208A65 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A5F9F2951560D13A00208A65 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -91,6 +118,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A5E7E833156A17D900B17D3E /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				A5E7E834156A17D900B17D3E /* DefaultFragmentShader.glsl */,
+				A5E7E835156A17D900B17D3E /* DefaultVertexShader.glsl */,
+				A5E7E836156A17D900B17D3E /* DiscretizeShader.glsl */,
+				A5E7E837156A17D900B17D3E /* HGaussianBlur.glsl */,
+				A5E7E838156A17D900B17D3E /* LuminanceFragmentShader.glsl */,
+				A5E7E839156A17D900B17D3E /* PixelateShader.glsl */,
+				A5E7E83A156A17D900B17D3E /* SuckShader.glsl */,
+				A5E7E83B156A17D900B17D3E /* VGaussianBlur.glsl */,
+				A5E7E844156A474000B17D3E /* MosacShader.glsl */,
+				A5E7E846156A4BDA00B17D3E /* CSEEmBossShader.glsl */,
+				A5E7E848156A547900B17D3E /* PancelShader.glsl */,
+				A5F5D461156B67290097E650 /* MultiTextureShader.glsl */,
+				A56A6FF3156B81E6004688A8 /* AlphaTestShader.glsl */,
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
 		A5F9F2841560D13A00208A65 = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +190,7 @@
 		A5F9F29A1560D13A00208A65 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A5E7E833156A17D900B17D3E /* Shaders */,
 				A5F9F29B1560D13A00208A65 /* JPFliter-Info.plist */,
 				A5F9F29C1560D13A00208A65 /* InfoPlist.strings */,
 				A5F9F29F1560D13A00208A65 /* main.m */,
@@ -154,6 +202,8 @@
 		A5F9F2B01560D16700208A65 /* GLFilters */ = {
 			isa = PBXGroup;
 			children = (
+				A5012532156B3BF3003E0283 /* CameraTargetView.h */,
+				A5012533156B3BF3003E0283 /* CameraTargetView.m */,
 				A5F9F2B11560D19E00208A65 /* JPFilteredView.h */,
 				A5F9F2B21560D19E00208A65 /* JPFilteredView.m */,
 				A5E20D56156627A200D03E63 /* JPFilteredCameraView.h */,
@@ -165,20 +215,11 @@
 		A5F9F2C01560E34E00208A65 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				A56A6FF1156B77C7004688A8 /* test2.png */,
 				A524E8FF1564B8F40082E8F5 /* test.png */,
-				A50D09321560F98200D7886E /* DefaultFragmentShader.glsl */,
-				A50D09331560F98200D7886E /* DefaultVertexShader.glsl */,
 				A5F9F2DB1560F14400208A65 /* tile_floor.png */,
-				A5F9F2C11560E37000208A65 /* shaders */,
 			);
 			name = Resource;
-			sourceTree = "<group>";
-		};
-		A5F9F2C11560E37000208A65 /* shaders */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = shaders;
 			sourceTree = "<group>";
 		};
 		A5F9F2CA1560E5DB00208A65 /* GLKitAdditions */ = {
@@ -249,9 +290,21 @@
 				A5F9F29E1560D13A00208A65 /* InfoPlist.strings in Resources */,
 				A5F9F2AA1560D13A00208A65 /* ViewController.xib in Resources */,
 				A5F9F2DC1560F14400208A65 /* tile_floor.png in Resources */,
-				A50D09341560F98200D7886E /* DefaultFragmentShader.glsl in Resources */,
-				A50D09351560F98200D7886E /* DefaultVertexShader.glsl in Resources */,
 				A524E9001564B8F50082E8F5 /* test.png in Resources */,
+				A5E7E83C156A17D900B17D3E /* DefaultFragmentShader.glsl in Resources */,
+				A5E7E83D156A17D900B17D3E /* DefaultVertexShader.glsl in Resources */,
+				A5E7E83E156A17D900B17D3E /* DiscretizeShader.glsl in Resources */,
+				A5E7E83F156A17D900B17D3E /* HGaussianBlur.glsl in Resources */,
+				A5E7E840156A17D900B17D3E /* LuminanceFragmentShader.glsl in Resources */,
+				A5E7E841156A17D900B17D3E /* PixelateShader.glsl in Resources */,
+				A5E7E842156A17D900B17D3E /* SuckShader.glsl in Resources */,
+				A5E7E843156A17D900B17D3E /* VGaussianBlur.glsl in Resources */,
+				A5E7E845156A474000B17D3E /* MosacShader.glsl in Resources */,
+				A5E7E847156A4BDA00B17D3E /* CSEEmBossShader.glsl in Resources */,
+				A5E7E849156A547900B17D3E /* PancelShader.glsl in Resources */,
+				A5F5D462156B67290097E650 /* MultiTextureShader.glsl in Resources */,
+				A56A6FF2156B77C7004688A8 /* test2.png in Resources */,
+				A56A6FF4156B81E6004688A8 /* AlphaTestShader.glsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +324,7 @@
 				A5F9F2D51560E5DB00208A65 /* GLKShaderVariable.m in Sources */,
 				A5F9F2D61560E5DB00208A65 /* GLKUniform.m in Sources */,
 				A5E20D58156627A200D03E63 /* JPFilteredCameraView.m in Sources */,
+				A5012534156B3BF3003E0283 /* CameraTargetView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

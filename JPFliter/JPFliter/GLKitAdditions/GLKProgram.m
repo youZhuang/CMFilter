@@ -35,13 +35,14 @@ NSString *const GLKProgramErrorDomain = @"GLKProgramErrorDomain";
 
 - (id)initWithVertexShaderFromFile:(NSString *)vertexShaderPath fragmentShaderFromFile:(NSString *)fragmentShaderPath error:(NSError *__autoreleasing *)error
 {
-    NSString *vertexShaderSource = [[NSString alloc] initWithContentsOfFile:vertexShaderPath encoding:NSUTF8StringEncoding error:error];
+    //NSString *vertexShaderSource = [[NSString alloc] initWithContentsOfFile:vertexShaderPath encoding:NSUTF8StringEncoding error:error];
+    NSString *vertexShaderSource = [NSString stringWithContentsOfFile:vertexShaderPath encoding:NSUTF8StringEncoding error:error];
     
     if (vertexShaderSource == nil) {
         return nil;
     }
     
-    NSString *fragmentShaderSource = [[NSString alloc] initWithContentsOfFile:fragmentShaderPath encoding:NSUTF8StringEncoding error:error];
+    NSString *fragmentShaderSource = [NSString stringWithContentsOfFile:fragmentShaderPath encoding:NSUTF8StringEncoding error:error];
     
     if (fragmentShaderSource == nil) {
         return nil;
@@ -71,6 +72,19 @@ NSString *const GLKProgramErrorDomain = @"GLKProgramErrorDomain";
 - (void)dealloc
 {
     glDeleteProgram(self.program);
+    
+    if (self.samplerBindings) {
+        [self.samplerBindings release];
+    }
+    if (self.dirtyUniforms) {
+        [self.dirtyUniforms release];
+    }
+    if (_uniforms) {
+        [_uniforms release];
+    }
+    if (_attributes) {
+        [_attributes release];
+    }
     [super dealloc];
 }
 
