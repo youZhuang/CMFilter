@@ -1,8 +1,8 @@
 //
-//  CameraTargetView.h
-//  XBImageFilters
+//  JPFilteredView.h
+//  JPFliter
 //
-//  Created by xiss burg on 4/13/12.
+//  Created by yiyang yuan on 5/14/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 

@@ -61,8 +61,8 @@ NSString *const GLKProgramErrorDomain = @"GLKProgramErrorDomain";
             return nil;
         }
         
-        _uniforms = [[self uniformsForProgram:self.program] copy];
-        _attributes = [[self attributesForProgram:self.program] copy];
+        _uniforms = [self uniformsForProgram:self.program];
+        _attributes = [self attributesForProgram:self.program];
         self.samplerBindings = [[NSMutableDictionary alloc] init];
         self.dirtyUniforms = [[NSMutableDictionary alloc] init];
     }

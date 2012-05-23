@@ -102,7 +102,7 @@ NSString *filterNames[13] = {@"正常",@"允吸效果",@"马赛克",@"水彩",@"
     //NSString *pencelPath = [[NSBundle mainBundle] pathForResource:@"PancelShader" ofType:@"glsl"];
     NSString *multitexPath = [[NSBundle mainBundle] pathForResource:@"MultiTextureShader" ofType:@"glsl"];
     NSString *alphaTestPath = [[NSBundle mainBundle] pathForResource:@"AlphaTestShader" ofType:@"glsl"];
-    // Setup a combination of these filters
+    // 设置滤镜的混合
     _paths = [[NSArray alloc] initWithObjects:
              [[NSArray alloc] initWithObjects:defaultPath, nil],
              [[NSArray alloc] initWithObjects:suckPath, nil],

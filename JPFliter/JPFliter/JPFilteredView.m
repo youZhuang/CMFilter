@@ -12,6 +12,8 @@
 
 const GLKMatrix2 GLKMatrix2Identity = {1,0,0,1};
 
+
+
 typedef struct{
     GLKVector3 position;
     GLKVector2 texCoord;
@@ -23,8 +25,8 @@ typedef struct{
 }
 
 @property (nonatomic,strong) EAGLContext *context;
-@property (nonatomic,assign) GLuint frameBuffer;
-@property (nonatomic,assign) GLuint colorRenderBuffer;
+@property (nonatomic,assign) GLuint frameBuffer;//帧缓冲区
+@property (nonatomic,assign) GLuint colorRenderBuffer;//颜色缓冲区
 
 @property (nonatomic,assign) GLint viewportWidth;
 @property (nonatomic,assign) GLint viewportHeight;
@@ -34,8 +36,8 @@ typedef struct{
 @property (nonatomic,assign) GLuint vertexBuffer;
 @property (nonatomic,assign) GLuint indexBuffer;
 
-@property (nonatomic,assign) GLuint texture;
-@property (nonatomic,assign) GLuint texture2;
+@property (nonatomic,assign) GLuint texture;//默认贴图
+@property (nonatomic,assign) GLuint texture2;//修饰贴图
 
 @property (nonatomic,assign) GLint textureWidth;
 @property (nonatomic,assign) GLint textureHeight;
@@ -44,13 +46,13 @@ typedef struct{
 @property (nonatomic,assign) GLint texture2Height;
 
 //@property (nonatomic,retain) GLKProgram *program;
-@property (nonatomic,assign) GLKMatrix4 contentModeTransform;
+@property (nonatomic,assign) GLKMatrix4 contentModeTransform;//正交矩阵，修正像素的渲染
 
 /**
  * 支持多通道滤镜
  */
-@property (assign, nonatomic) GLuint oddPassTexture;
-@property (assign, nonatomic) GLuint evenPassTexture;
+@property (assign, nonatomic) GLuint oddPassTexture;//第三个通道
+@property (assign, nonatomic) GLuint evenPassTexture;//第二个通道
 @property (assign, nonatomic) GLuint oddPassFramebuffer;
 @property (assign, nonatomic) GLuint evenPassFrambuffer;
 
@@ -275,7 +277,7 @@ const GLubyte Indices[] = {
     if (error != nil) {
         NSLog(@"configure shader error :%@",[error localizedDescription]);
     }
-    self.contentModeTransform = GLKMatrix4MakeOrtho(-1.f, 1.f, -1.f, 1.f, -1.f, 1.f);
+    self.contentModeTransform = GLKMatrix4MakeOrtho(-1.f, 1.f, -1.f, 1.f, -1.f, 1.f);//用来像素修正渲染
     self.contentTransform = GLKMatrix4Identity;
     self.texcoordTransform = GLKMatrix2Identity;
     
@@ -347,7 +349,6 @@ const GLubyte Indices[] = {
 - (void)refreshContentTransform
 {
     GLKMatrix4 composedTransform = GLKMatrix4Multiply(self.contentTransform, self.contentModeTransform);
-    
     // The contentTransform is only applied on the last program otherwise it would be reapplied in each filter. Also, the contentTransform's
     // purpose is to adjust the final image on the framebuffer/screen. That is why it is applied only in the end.
     GLKProgram *lastProgram = [self.programs lastObject];
