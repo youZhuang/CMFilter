@@ -24,6 +24,12 @@
 		A5E7E847156A4BDA00B17D3E /* CSEEmBossShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A5E7E846156A4BDA00B17D3E /* CSEEmBossShader.glsl */; };
 		A5E7E849156A547900B17D3E /* PancelShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A5E7E848156A547900B17D3E /* PancelShader.glsl */; };
 		A5F5D462156B67290097E650 /* MultiTextureShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A5F5D461156B67290097E650 /* MultiTextureShader.glsl */; };
+		A5F60C73156DD4CA00393FC2 /* ParticleSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F60C72156DD4CA00393FC2 /* ParticleSystem.m */; };
+		A5F60C77156DD4F400393FC2 /* Particle.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F60C76156DD4F400393FC2 /* Particle.m */; };
+		A5F60CAD156DE30200393FC2 /* TestShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A5F60CAC156DE30200393FC2 /* TestShader.glsl */; };
+		A5F60CC5156DFDA900393FC2 /* TortuosityShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A5F60CC4156DFDA900393FC2 /* TortuosityShader.glsl */; };
+		A5F60CC7156DFED300393FC2 /* Sepia_toneShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A5F60CC6156DFED300393FC2 /* Sepia_toneShader.glsl */; };
+		A5F60CC9156DFEF900393FC2 /* ShowcaseShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A5F60CC8156DFEF900393FC2 /* ShowcaseShader.glsl */; };
 		A5F9F2941560D13A00208A65 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F9F2931560D13A00208A65 /* UIKit.framework */; };
 		A5F9F2961560D13A00208A65 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F9F2951560D13A00208A65 /* Foundation.framework */; };
 		A5F9F2981560D13A00208A65 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F9F2971560D13A00208A65 /* CoreGraphics.framework */; };
@@ -66,6 +72,14 @@
 		A5E7E846156A4BDA00B17D3E /* CSEEmBossShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CSEEmBossShader.glsl; sourceTree = "<group>"; };
 		A5E7E848156A547900B17D3E /* PancelShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PancelShader.glsl; sourceTree = "<group>"; };
 		A5F5D461156B67290097E650 /* MultiTextureShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MultiTextureShader.glsl; sourceTree = "<group>"; };
+		A5F60C71156DD4CA00393FC2 /* ParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleSystem.h; sourceTree = "<group>"; };
+		A5F60C72156DD4CA00393FC2 /* ParticleSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParticleSystem.m; sourceTree = "<group>"; };
+		A5F60C75156DD4F400393FC2 /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
+		A5F60C76156DD4F400393FC2 /* Particle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Particle.m; sourceTree = "<group>"; };
+		A5F60CAC156DE30200393FC2 /* TestShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestShader.glsl; sourceTree = "<group>"; };
+		A5F60CC4156DFDA900393FC2 /* TortuosityShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TortuosityShader.glsl; sourceTree = "<group>"; };
+		A5F60CC6156DFED300393FC2 /* Sepia_toneShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Sepia_toneShader.glsl; sourceTree = "<group>"; };
+		A5F60CC8156DFEF900393FC2 /* ShowcaseShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ShowcaseShader.glsl; sourceTree = "<group>"; };
 		A5F9F28F1560D13A00208A65 /* JPFliter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JPFliter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5F9F2931560D13A00208A65 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A5F9F2951560D13A00208A65 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -134,6 +148,10 @@
 				A5E7E848156A547900B17D3E /* PancelShader.glsl */,
 				A5F5D461156B67290097E650 /* MultiTextureShader.glsl */,
 				A56A6FF3156B81E6004688A8 /* AlphaTestShader.glsl */,
+				A5F60CAC156DE30200393FC2 /* TestShader.glsl */,
+				A5F60CC4156DFDA900393FC2 /* TortuosityShader.glsl */,
+				A5F60CC6156DFED300393FC2 /* Sepia_toneShader.glsl */,
+				A5F60CC8156DFEF900393FC2 /* ShowcaseShader.glsl */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -208,6 +226,10 @@
 				A5F9F2B21560D19E00208A65 /* JPFilteredView.m */,
 				A5E20D56156627A200D03E63 /* JPFilteredCameraView.h */,
 				A5E20D57156627A200D03E63 /* JPFilteredCameraView.m */,
+				A5F60C71156DD4CA00393FC2 /* ParticleSystem.h */,
+				A5F60C72156DD4CA00393FC2 /* ParticleSystem.m */,
+				A5F60C75156DD4F400393FC2 /* Particle.h */,
+				A5F60C76156DD4F400393FC2 /* Particle.m */,
 			);
 			name = GLFilters;
 			sourceTree = "<group>";
@@ -305,6 +327,10 @@
 				A5F5D462156B67290097E650 /* MultiTextureShader.glsl in Resources */,
 				A56A6FF2156B77C7004688A8 /* test2.png in Resources */,
 				A56A6FF4156B81E6004688A8 /* AlphaTestShader.glsl in Resources */,
+				A5F60CAD156DE30200393FC2 /* TestShader.glsl in Resources */,
+				A5F60CC5156DFDA900393FC2 /* TortuosityShader.glsl in Resources */,
+				A5F60CC7156DFED300393FC2 /* Sepia_toneShader.glsl in Resources */,
+				A5F60CC9156DFEF900393FC2 /* ShowcaseShader.glsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +351,8 @@
 				A5F9F2D61560E5DB00208A65 /* GLKUniform.m in Sources */,
 				A5E20D58156627A200D03E63 /* JPFilteredCameraView.m in Sources */,
 				A5012534156B3BF3003E0283 /* CameraTargetView.m in Sources */,
+				A5F60C73156DD4CA00393FC2 /* ParticleSystem.m in Sources */,
+				A5F60C77156DD4F400393FC2 /* Particle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

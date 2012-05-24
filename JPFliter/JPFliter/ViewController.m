@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "JPFilteredView.h"
 
-NSString *filterNames[13] = {@"正常",@"允吸效果",@"马赛克",@"水彩",@"灰度",@"横向模糊",@"纵向模糊",@"横纵向模糊",@"灰度+横纵向模糊",@"Mosaic",@"CSEEmBoss",@"混合贴图",@"Alpha测试"};
+NSString *filterNames[16] = {@"正常",@"混合贴图",@"允吸效果",@"扭曲",@"水彩",@"淡绿色",@"玻璃",@"马赛克",@"灰度",@"横向模糊",@"纵向模糊",@"横纵向模糊",@"灰度+横纵向模糊",@"CSEEmBoss",@"Alpha测试"};
 
 
 @interface ViewController ()
@@ -74,7 +74,7 @@ NSString *filterNames[13] = {@"正常",@"允吸效果",@"马赛克",@"水彩",@"
     [self.view addSubview:switchCameraBtn];
     
     
-    filterLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
+    filterLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
     filterLabel.textColor = [UIColor whiteColor];
     filterLabel.backgroundColor = [UIColor clearColor];
     filterLabel.textAlignment = UITextAlignmentLeft;
@@ -97,26 +97,37 @@ NSString *filterNames[13] = {@"正常",@"允吸效果",@"马赛克",@"水彩",@"
     NSString *discretizePath = [[NSBundle mainBundle] pathForResource:@"DiscretizeShader" ofType:@"glsl"];
     NSString *pixelatePath = [[NSBundle mainBundle] pathForResource:@"PixelateShader" ofType:@"glsl"];
     NSString *suckPath = [[NSBundle mainBundle] pathForResource:@"SuckShader" ofType:@"glsl"];
-    NSString *mosaicPath = [[NSBundle mainBundle] pathForResource:@"MosacShader" ofType:@"glsl"];
+    //NSString *mosaicPath = [[NSBundle mainBundle] pathForResource:@"MosacShader" ofType:@"glsl"];
     NSString *cseembossPath = [[NSBundle mainBundle] pathForResource:@"CSEEmBossShader" ofType:@"glsl"];
     //NSString *pencelPath = [[NSBundle mainBundle] pathForResource:@"PancelShader" ofType:@"glsl"];
     NSString *multitexPath = [[NSBundle mainBundle] pathForResource:@"MultiTextureShader" ofType:@"glsl"];
     NSString *alphaTestPath = [[NSBundle mainBundle] pathForResource:@"AlphaTestShader" ofType:@"glsl"];
+    //NSString *TestPath = [[NSBundle mainBundle] pathForResource:@"TestShader" ofType:@"glsl"];
+    NSString *TortuosityPath = [[NSBundle mainBundle] pathForResource:@"TortuosityShader" ofType:@"glsl"];
+    NSString *SepiatonePath = [[NSBundle mainBundle] pathForResource:@"Sepia_toneShader" ofType:@"glsl"];
+    NSString *ShowcasePath = [[NSBundle mainBundle] pathForResource:@"ShowcaseShader" ofType:@"glsl"];
     // 设置滤镜的混合
+    
     _paths = [[NSArray alloc] initWithObjects:
-             [[NSArray alloc] initWithObjects:defaultPath, nil],
-             [[NSArray alloc] initWithObjects:suckPath, nil],
-             [[NSArray alloc] initWithObjects:pixelatePath, nil],
-             [[NSArray alloc] initWithObjects:discretizePath, nil],
-             [[NSArray alloc] initWithObjects:luminancePath, nil], 
-             [[NSArray alloc] initWithObjects:hBlurPath, nil],
-             [[NSArray alloc] initWithObjects:vBlurPath, nil],
-             [[NSArray alloc] initWithObjects:hBlurPath, vBlurPath, nil],
-             [[NSArray alloc] initWithObjects:luminancePath, hBlurPath, vBlurPath, nil], 
-             [[NSArray alloc] initWithObjects:mosaicPath, nil],
-             [[NSArray alloc] initWithObjects:cseembossPath, nil],
-             [[NSArray alloc] initWithObjects:multitexPath, nil],
-             [[NSArray alloc] initWithObjects:alphaTestPath, nil],nil];
+             [[NSArray alloc] initWithObjects:defaultPath, nil],//正常
+             [[NSArray alloc] initWithObjects:multitexPath, nil],//混合
+             [[NSArray alloc] initWithObjects:suckPath, nil],//允吸
+             [[NSArray alloc] initWithObjects:TortuosityPath, nil],//中间扭曲
+             [[NSArray alloc] initWithObjects:discretizePath, nil],//水彩
+              
+             [[NSArray alloc] initWithObjects:SepiatonePath, nil],//淡绿
+             [[NSArray alloc] initWithObjects:ShowcasePath, nil],//玻璃
+              
+             [[NSArray alloc] initWithObjects:pixelatePath, nil],//马赛克
+              
+             [[NSArray alloc] initWithObjects:luminancePath, nil], //灰度
+             [[NSArray alloc] initWithObjects:hBlurPath, nil],//horizintal高斯模糊
+             [[NSArray alloc] initWithObjects:vBlurPath, nil],//vertical高斯模糊
+             [[NSArray alloc] initWithObjects:hBlurPath, vBlurPath, nil],//横纵向
+             [[NSArray alloc] initWithObjects:luminancePath, hBlurPath, vBlurPath, nil],//灰度+横纵向
+              
+             [[NSArray alloc] initWithObjects:cseembossPath, nil],//铅笔
+             [[NSArray alloc] initWithObjects:alphaTestPath, nil],nil];//alpha测试
 }
 
 #pragma mark - Button Actions
@@ -206,7 +217,7 @@ NSString *filterNames[13] = {@"正常",@"允吸效果",@"马赛克",@"水彩",@"
     if (files == nil) {
         return;
     }
-    if (filterIndex ==  11) {
+    if (filterIndex ==  1) {
         self.cameraView.isMultiTexture = YES;
     }else {
         self.cameraView.isMultiTexture = NO;

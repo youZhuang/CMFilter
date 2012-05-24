@@ -49,12 +49,12 @@ typedef struct{
 @property (nonatomic,assign) GLKMatrix4 contentModeTransform;//正交矩阵，修正像素的渲染
 
 /**
- * 支持多通道滤镜
+ * 支持多通道滤镜，仅针对一张贴图
  */
-@property (assign, nonatomic) GLuint oddPassTexture;//第三个通道
-@property (assign, nonatomic) GLuint evenPassTexture;//第二个通道
-@property (assign, nonatomic) GLuint oddPassFramebuffer;
-@property (assign, nonatomic) GLuint evenPassFrambuffer;
+@property (assign, nonatomic) GLuint oddPassTexture;//单数通道贴图
+@property (assign, nonatomic) GLuint evenPassTexture;//双数通道贴图
+@property (assign, nonatomic) GLuint oddPassFramebuffer;//单数通道帧缓冲
+@property (assign, nonatomic) GLuint evenPassFrambuffer;//双数通道帧缓冲
 
 -(void)setDisplayLink;
 
@@ -77,7 +77,6 @@ typedef struct{
 - (GLuint)generateDefaultFramebufferWithTargetTexture:(GLuint)texture;
 
 - (GLuint)setupTexture:(NSString *)fileName;
-- (GLuint)setupSubTexture:(NSString *)fileName;
 
 void ImageProviderReleaseData(void *info, const void *data, size_t size);
 
@@ -373,19 +372,12 @@ const GLubyte Indices[] = {
 
 -(void)render
 {
-    if (_isMultiTexture) {
-        //glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-        //glEnable(GL_BLEND);
-    }else {
-        glDisable(GL_BLEND);
-    }
-   // NSLog(@"render ...");
     [EAGLContext setCurrentContext:self.context];
     
     for (int pass = 0; pass < self.programs.count; ++pass) {
         GLKProgram *program = [self.programs objectAtIndex:pass];
         
-        if (pass == self.programs.count - 1) { // Last pass, bind screen framebuffer
+        if (pass == self.programs.count - 1) { // 最后一个通道 绑定到framebuffer
             glViewport(0, 0, self.viewportWidth, self.viewportHeight);
             glBindFramebuffer(GL_FRAMEBUFFER, self.frameBuffer);
         }
@@ -499,13 +491,6 @@ const GLubyte Indices[] = {
     }
     
     UIImage *image = [self _imageFromFramebuffer:lastFramebuffer width:targetWidth height:targetHeight orientation:UIImageOrientationUp];
-    
-    NSLog(@"filteredImage :%@",NSStringFromCGSize(image.size));
-//    if (_isMultiTexture) {
-//        GLuint secondFrameBuffer = [self generateDefaultFramebufferWithTargetTexture:self.texture2];
-//        UIImage *secondImage = [self _imageFromFramebuffer:secondFrameBuffer width:targetWidth height:targetHeight orientation:UIImageOrientationLeft];
-//        NSLog(@"secondImage size :%@",NSStringFromCGSize(secondImage.size));
-//    }
     
     // Now discard the lastFramebuffer
     const GLenum discards[] = {GL_COLOR_ATTACHMENT0};
