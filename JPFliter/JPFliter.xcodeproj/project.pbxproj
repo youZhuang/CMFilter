@@ -11,6 +11,7 @@
 		A524E9001564B8F50082E8F5 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = A524E8FF1564B8F40082E8F5 /* test.png */; };
 		A56A6FF2156B77C7004688A8 /* test2.png in Resources */ = {isa = PBXBuildFile; fileRef = A56A6FF1156B77C7004688A8 /* test2.png */; };
 		A56A6FF4156B81E6004688A8 /* AlphaTestShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A56A6FF3156B81E6004688A8 /* AlphaTestShader.glsl */; };
+		A5BAB8CD156F3CC800A2ED1D /* test3.png in Resources */ = {isa = PBXBuildFile; fileRef = A5BAB8CC156F3CC800A2ED1D /* test3.png */; };
 		A5E20D58156627A200D03E63 /* JPFilteredCameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E20D57156627A200D03E63 /* JPFilteredCameraView.m */; };
 		A5E7E83C156A17D900B17D3E /* DefaultFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A5E7E834156A17D900B17D3E /* DefaultFragmentShader.glsl */; };
 		A5E7E83D156A17D900B17D3E /* DefaultVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = A5E7E835156A17D900B17D3E /* DefaultVertexShader.glsl */; };
@@ -58,6 +59,7 @@
 		A524E8FF1564B8F40082E8F5 /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = test.png; path = JPFliter/resource/test.png; sourceTree = "<group>"; };
 		A56A6FF1156B77C7004688A8 /* test2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = test2.png; path = JPFliter/resource/test2.png; sourceTree = "<group>"; };
 		A56A6FF3156B81E6004688A8 /* AlphaTestShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AlphaTestShader.glsl; sourceTree = "<group>"; };
+		A5BAB8CC156F3CC800A2ED1D /* test3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = test3.png; path = JPFliter/resource/test3.png; sourceTree = "<group>"; };
 		A5E20D56156627A200D03E63 /* JPFilteredCameraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPFilteredCameraView.h; sourceTree = "<group>"; };
 		A5E20D57156627A200D03E63 /* JPFilteredCameraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPFilteredCameraView.m; sourceTree = "<group>"; };
 		A5E7E834156A17D900B17D3E /* DefaultFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DefaultFragmentShader.glsl; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 		A5F9F2C01560E34E00208A65 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				A5BAB8CC156F3CC800A2ED1D /* test3.png */,
 				A56A6FF1156B77C7004688A8 /* test2.png */,
 				A524E8FF1564B8F40082E8F5 /* test.png */,
 				A5F9F2DB1560F14400208A65 /* tile_floor.png */,
@@ -331,6 +334,7 @@
 				A5F60CC5156DFDA900393FC2 /* TortuosityShader.glsl in Resources */,
 				A5F60CC7156DFED300393FC2 /* Sepia_toneShader.glsl in Resources */,
 				A5F60CC9156DFEF900393FC2 /* ShowcaseShader.glsl in Resources */,
+				A5BAB8CD156F3CC800A2ED1D /* test3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

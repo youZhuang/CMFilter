@@ -779,7 +779,7 @@ const GLubyte Indices[] = {
     
     if (_isMultiTexture) {
         glDeleteTextures(1, &_texture2);
-        _texture2 = [self setupTexture:@"test2.png"];
+        _texture2 = [self setupTexture:@"test3.png"];
         if (self.programs.count > 0) {
             GLKProgram *firstProgram = [self.programs objectAtIndex:0];
             [firstProgram bindSamplerNamed:@"s_texture2" toTexture:self.texture2 unit:1];

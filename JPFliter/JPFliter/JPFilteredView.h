@@ -29,6 +29,7 @@ extern const GLKMatrix2 GLKMatrix2Identity;
 - (UIImage *)takeScreenshot;
 - (UIImage *)takeScreenshotWithImageOrientation:(UIImageOrientation)orientation;
 
+//设定贴图
 - (void)_setTextureData:(GLvoid *)textureData width:(GLint)width height:(GLint)height;
 - (void)_updateTextureWithData:(GLvoid *)textureData;
 

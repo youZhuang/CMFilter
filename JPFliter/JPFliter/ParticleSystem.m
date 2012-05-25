@@ -9,5 +9,6 @@
 #import "ParticleSystem.h"
 
 @implementation ParticleSystem
+@synthesize number = _number;
 
 @end
