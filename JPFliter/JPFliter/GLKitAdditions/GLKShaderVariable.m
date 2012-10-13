@@ -29,12 +29,6 @@
     return self;
 }
 
--(void)dealloc
-{
-    [_name release];
-    [super dealloc];
-}
-
 @end
 
 size_t TypeSizeForType(GLenum type)

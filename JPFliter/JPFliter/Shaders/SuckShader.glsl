@@ -20,6 +20,5 @@ void main()
     vec2 v = v_texCoord - center;
     v.x = 0.5 + v.x*cos(v.x*PI/2.0);
     v.y = 0.5 + v.y*cos(v.y*PI/2.0);
-    
     gl_FragColor = texture2D(s_texture, v);
 }

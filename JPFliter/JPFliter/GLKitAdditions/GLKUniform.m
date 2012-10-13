@@ -25,7 +25,6 @@
 - (void)dealloc
 {
     free(_value);
-    [super dealloc];
 }
 
 #pragma mark - Methods

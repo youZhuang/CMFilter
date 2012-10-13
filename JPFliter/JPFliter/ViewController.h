@@ -7,16 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JPFilteredCameraView.h"
+//#import "JPFilteredCameraView.h"
+#import "XBFilteredCameraView.h"
 #import "CameraTargetView.h"
 
-@interface ViewController : UIViewController<JPFilteredCameraViewDelegate>
+@interface ViewController : UIViewController<XBFilteredCameraViewDelegate>
 
-@property (nonatomic,retain) JPFilteredCameraView *cameraView;
+@property (nonatomic,retain) XBFilteredCameraView *cameraView;
 @property (nonatomic,retain) CameraTargetView *cameraTargetView;
 
 - (void)takeAPictureButtonTouchUpInside:(id)sender;
 - (void)changeFilterButtonTouchUpInside:(id)sender;
-- (void)cameraPostionChange:(id)sender;
+- (void)cameraButtonTouchUpInside:(id)sender;
 
 @end
